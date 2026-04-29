@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GitFlow - File Explorer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ffb4ab",
+                      "inverse-on-surface": "#303030",
+                      "on-secondary-container": "#b6b5b4",
+                      "on-secondary-fixed": "#1b1c1c",
+                      "primary-fixed-dim": "#a3c9ff",
+                      "surface-dim": "#131313",
+                      "surface-container-low": "#1b1b1c",
+                      "on-tertiary": "#512300",
+                      "on-error-container": "#ffdad6",
+                      "secondary-fixed": "#e4e2e1",
+                      "surface-variant": "#353535",
+                      "surface-bright": "#393939",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-high": "#2a2a2a",
+                      "on-primary": "#00315c",
+                      "primary-container": "#0078d4",
+                      "on-tertiary-fixed": "#311300",
+                      "tertiary-container": "#bc5b00",
+                      "surface-container": "#202020",
+                      "tertiary-fixed-dim": "#ffb689",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed": "#d3e3ff",
+                      "secondary": "#c8c6c5",
+                      "on-primary-fixed-variant": "#004883",
+                      "on-surface-variant": "#c0c7d4",
+                      "secondary-fixed-dim": "#c8c6c5",
+                      "on-secondary": "#303030",
+                      "on-error": "#690005",
+                      "on-primary-container": "#ffffff",
+                      "inverse-surface": "#e5e2e1",
+                      "on-background": "#e5e2e1",
+                      "background": "#131313",
+                      "on-secondary-fixed-variant": "#474746",
+                      "tertiary-fixed": "#ffdbc8",
+                      "surface-container-highest": "#353535",
+                      "inverse-primary": "#0060ab",
+                      "on-tertiary-container": "#ffffff",
+                      "on-tertiary-fixed-variant": "#743500",
+                      "outline-variant": "#404752",
+                      "surface": "#131313",
+                      "primary": "#a3c9ff",
+                      "secondary-container": "#474746",
+                      "outline": "#8a919e",
+                      "tertiary": "#ffb689",
+                      "surface-tint": "#a3c9ff",
+                      "error-container": "#93000a",
+                      "on-primary-fixed": "#001c39"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "space-lg": "24px",
+                      "unit": "4px",
+                      "space-sm": "8px",
+                      "space-md": "16px",
+                      "gutter-grid": "12px",
+                      "space-xs": "4px",
+                      "space-xl": "32px",
+                      "margin-page": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "code": [
+                              "monospace"
+                      ],
+                      "label-bold": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "title-md": [
+                              "Inter"
+                      ],
+                      "body-base": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-bold": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-base": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-base antialiased h-screen w-screen overflow-hidden flex flex-col relative select-none">
+<!-- TopAppBar -->
+<div class="docked full-width top-0 border-b border-zinc-800/50 shadow-none bg-zinc-900/80 backdrop-blur-xl z-50">
+<div class="flex items-center justify-between h-10 px-3 w-full">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-zinc-200 text-sm" style="font-variation-settings: 'FILL' 0;">folder</span>
+<span class="text-lg font-bold text-zinc-200 ml-2 font-['Inter'] tracking-tight">Better GitHub</span>
+</div>
+<div class="flex items-center space-x-2">
+<!-- Search Bar (on_right logic but centered generally in modern OS, placing here per simple flex) -->
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-2 text-zinc-400 text-[16px]">search</span>
+<input class="bg-zinc-800/50 border border-zinc-700/50 text-on-surface text-[12px] h-6 pl-7 pr-2 rounded focus:outline-none focus:border-blue-500 focus:border-b-2 w-48 font-body-sm transition-all" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center space-x-1 ml-4">
+<button class="h-6 w-8 flex items-center justify-center hover:bg-zinc-800/50 transition-colors text-zinc-400 rounded-sm cursor-default active:opacity-80" data-icon="remove">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<button class="h-6 w-8 flex items-center justify-center hover:bg-zinc-800/50 transition-colors text-zinc-400 rounded-sm cursor-default active:opacity-80" data-icon="check_box_outline_blank">
+<span class="material-symbols-outlined text-[14px]">check_box_outline_blank</span>
+</button>
+<button class="h-6 w-8 flex items-center justify-center hover:bg-error/20 hover:text-error transition-colors text-zinc-400 rounded-sm cursor-default active:opacity-80" data-icon="close">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Layout Area -->
+<div class="flex flex-1 overflow-hidden relative">
+<!-- SideNavBar -->
+<div class="h-screen w-[260px] border-r border-zinc-800/40 none bg-zinc-900/40 backdrop-blur-2xl z-40 hidden md:flex flex-col pt-4">
+<div class="px-5 pb-2">
+<span class="text-sm font-bold text-zinc-100 font-['Inter'] text-[13px] opacity-70 uppercase tracking-wider text-[10px]">Quick Access</span>
+</div>
+<nav class="flex-1 flex flex-col space-y-1 mt-1">
+<a class="text-zinc-400 flex items-center px-3 py-2 rounded-md mx-2 hover:bg-white/5 hover:text-zinc-200 transition-all duration-150 ease-in-out font-['Inter'] text-[13px]" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">home</span>
+<span>Home</span>
+</a>
+<a class="relative bg-white/5 text-zinc-100 before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[3px] before:bg-blue-500 before:rounded-full flex items-center px-3 py-2 rounded-md mx-2 hover:bg-white/5 hover:text-zinc-200 transition-all duration-150 ease-in-out font-['Inter'] text-[13px]" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px] text-blue-500">folder_shared</span>
+<span>Projects</span>
+</a>
+<a class="text-zinc-400 flex items-center px-3 py-2 rounded-md mx-2 hover:bg-white/5 hover:text-zinc-200 transition-all duration-150 ease-in-out font-['Inter'] text-[13px]" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">download</span>
+<span>Downloads</span>
+</a>
+<a class="text-zinc-400 flex items-center px-3 py-2 rounded-md mx-2 hover:bg-white/5 hover:text-zinc-200 transition-all duration-150 ease-in-out font-['Inter'] text-[13px] mt-auto mb-10" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<!-- Content Canvas -->
+<main class="flex-1 bg-surface flex flex-col overflow-hidden relative">
+<!-- Toolbar -->
+<div class="h-14 border-b border-surface-variant flex items-center px-4 space-x-4 bg-surface-container-low/50 backdrop-blur-md">
+<button class="flex items-center space-x-2 px-3 py-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="font-body-sm">New</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<div class="h-4 w-px bg-surface-variant mx-2"></div>
+<div class="flex items-center space-x-1">
+<button class="p-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant" title="Cut">
+<span class="material-symbols-outlined text-[20px]">content_cut</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant" title="Copy">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant" title="Paste">
+<span class="material-symbols-outlined text-[20px]">content_paste</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant" title="Rename">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant" title="Share">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="p-1.5 rounded-md hover:bg-error/10 hover:text-error transition-colors text-on-surface-variant" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<div class="h-4 w-px bg-surface-variant mx-2"></div>
+<button class="flex items-center space-x-2 px-3 py-1.5 rounded-md hover:bg-white/5 transition-colors text-on-surface-variant ml-auto" title="Save As">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span class="font-body-sm">Save As</span>
+</button>
+</div>
+<!-- Breadcrumb / Path -->
+<div class="px-6 py-3 flex items-center text-sm font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] mr-2">home</span>
+<span class="material-symbols-outlined text-[16px] mx-1 text-outline">chevron_right</span>
+<span class="hover:text-on-surface cursor-pointer">Projects</span>
+<span class="material-symbols-outlined text-[16px] mx-1 text-outline">chevron_right</span>
+<span class="text-on-surface font-medium">Apollo-Client-Refactor</span>
+</div>
+<!-- File List Grid -->
+<div class="flex-1 overflow-y-auto px-6 pb-6">
+<div class="grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center border-b border-surface-variant pb-2 mb-2 text-on-surface-variant font-label-bold text-xs uppercase tracking-wider">
+<div class="w-6"></div>
+<div>Name</div>
+<div class="w-32 text-right">Date modified</div>
+<div class="w-24 text-right">Size</div>
+</div>
+<!-- List Items -->
+<div class="group grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center py-2 px-2 -mx-2 rounded-md hover:bg-surface-bright/40 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[#F8D775] text-[20px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<div class="font-body-base text-on-surface">src</div>
+<div class="w-32 text-right font-body-sm text-on-surface-variant">10/24/2023 2:45 PM</div>
+<div class="w-24 text-right font-body-sm text-on-surface-variant">--</div>
+</div>
+<div class="group grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center py-2 px-2 -mx-2 rounded-md hover:bg-surface-bright/40 transition-colors cursor-default">
+<span class="material-symbols-outlined text-[#F8D775] text-[20px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+<div class="font-body-base text-on-surface">tests</div>
+<div class="w-32 text-right font-body-sm text-on-surface-variant">10/22/2023 9:12 AM</div>
+<div class="w-24 text-right font-body-sm text-on-surface-variant">--</div>
+</div>
+<!-- The "Right Clicked" Item -->
+<div class="relative group grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center py-2 px-2 -mx-2 rounded-md bg-white/5 transition-colors cursor-default before:content-[''] before:absolute before:left-0 before:top-1 before:bottom-1 before:w-[3px] before:bg-blue-500 before:rounded-full">
+<span class="material-symbols-outlined text-blue-400 text-[20px]">description</span>
+<div class="font-body-base text-on-surface">schema_v2.graphql</div>
+<div class="w-32 text-right font-body-sm text-on-surface-variant">10/26/2023 11:30 AM</div>
+<div class="w-24 text-right font-body-sm text-on-surface-variant">12 KB</div>
+</div>
+<div class="group grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center py-2 px-2 -mx-2 rounded-md hover:bg-surface-bright/40 transition-colors cursor-default">
+<span class="material-symbols-outlined text-green-400 text-[20px]">data_object</span>
+<div class="font-body-base text-on-surface">package.json</div>
+<div class="w-32 text-right font-body-sm text-on-surface-variant">10/20/2023 4:20 PM</div>
+<div class="w-24 text-right font-body-sm text-on-surface-variant">4 KB</div>
+</div>
+<div class="group grid grid-cols-[auto_1fr_auto_auto] gap-4 items-center py-2 px-2 -mx-2 rounded-md hover:bg-surface-bright/40 transition-colors cursor-default">
+<span class="material-symbols-outlined text-zinc-300 text-[20px]">article</span>
+<div class="font-body-base text-on-surface">README.md</div>
+<div class="w-32 text-right font-body-sm text-on-surface-variant">10/15/2023 1:05 PM</div>
+<div class="w-24 text-right font-body-sm text-on-surface-variant">8 KB</div>
+</div>
+</div>
+<!-- Context Menu (Absolute positioned relative to main content area to simulate opening over the file) -->
+<div class="absolute top-[220px] left-[300px] w-64 bg-[#202020]/80 backdrop-blur-2xl rounded-xl border border-surface-variant shadow-[0_8px_32px_rgba(0,0,0,0.6)] py-1 flex flex-col z-50 overflow-hidden font-body-sm text-on-surface">
+<!-- Grouped Actions Row -->
+<div class="flex items-center justify-between px-2 py-1.5 border-b border-surface-variant/50 mb-1">
+<button class="flex-1 flex justify-center py-1.5 rounded-md hover:bg-white/10 transition-colors text-on-surface" title="Cut">
+<span class="material-symbols-outlined text-[18px]">content_cut</span>
+</button>
+<button class="flex-1 flex justify-center py-1.5 rounded-md hover:bg-white/10 transition-colors text-on-surface" title="Copy">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="flex-1 flex justify-center py-1.5 rounded-md hover:bg-white/10 transition-colors text-on-surface" title="Paste">
+<span class="material-symbols-outlined text-[18px]">content_paste</span>
+</button>
+<button class="flex-1 flex justify-center py-1.5 rounded-md hover:bg-white/10 transition-colors text-on-surface" title="Share">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="flex-1 flex justify-center py-1.5 rounded-md hover:bg-error/20 text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<!-- Menu Items -->
+<button class="flex items-center px-3 py-1.5 mx-1 rounded-md hover:bg-white/10 transition-colors text-left group">
+<span class="material-symbols-outlined text-[16px] mr-3 text-on-surface-variant group-hover:text-on-surface">download</span>
+<span class="flex-1">Download File</span>
+</button>
+<button class="flex items-center px-3 py-1.5 mx-1 rounded-md hover:bg-white/10 transition-colors text-left group">
+<span class="material-symbols-outlined text-[16px] mr-3 text-on-surface-variant group-hover:text-on-surface">cloud_off</span>
+<span class="flex-1">Make Available Offline</span>
+</button>
+<button class="flex items-center px-3 py-1.5 mx-1 rounded-md hover:bg-white/10 transition-colors text-left group">
+<span class="material-symbols-outlined text-[16px] mr-3 text-on-surface-variant group-hover:text-on-surface">note_alt</span>
+<span class="flex-1">Project Notes</span>
+</button>
+<div class="h-px bg-surface-variant/50 my-1 mx-3"></div>
+<button class="flex items-center px-3 py-1.5 mx-1 rounded-md hover:bg-white/10 transition-colors text-left group mt-1">
+<span class="material-symbols-outlined text-[16px] mr-3 text-on-surface-variant group-hover:text-on-surface">info</span>
+<span class="flex-1">Properties</span>
+</button>
+</div>
+</main>
+</div>
+</body></html>
