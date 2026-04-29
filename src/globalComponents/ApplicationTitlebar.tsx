@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import "./ApplicationTitlebar.css";
 
@@ -83,7 +83,7 @@ function ApplicationTitlebar() {
       {/* ── Left: App identity ── */}
       <div className="titlebar__left" data-tauri-drag-region>
         <div className="titlebar__app-icon">
-          <GitHubIcon />
+          {/* <GitHubIcon /> , i think i may or maynot add icon later in this ?*/}
         </div>
         <span className="titlebar__app-name">GitHub Explorer</span>
       </div>

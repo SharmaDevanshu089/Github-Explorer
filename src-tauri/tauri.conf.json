@@ -13,8 +13,10 @@
     "windows": [
       {
         "title": "github-explorer",
-        "width": 800,
-        "height": 600,
+        "width": 1280,
+        "height": 720,
+        "minHeight": 640,
+        "minWidth": 1024,
         "decorations": false,
         "transparent": true
       }
