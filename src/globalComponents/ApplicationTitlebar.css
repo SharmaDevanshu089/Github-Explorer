@@ -7,9 +7,9 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .titlebar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
 
   height: 40px;
   width: 100%;

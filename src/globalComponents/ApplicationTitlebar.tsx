@@ -4,15 +4,6 @@ import "./ApplicationTitlebar.css";
 
 // ── SVG Icon Components ───────────────────────────────────────────────────────
 
-const SearchIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M6.5 1a5.5 5.5 0 1 0 3.592 9.675l3.116 3.117a.75.75 0 0 0 1.06-1.06L11.152 9.614A5.5 5.5 0 0 0 6.5 1zm-4 5.5a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"
-      fill="currentColor"
-    />
-  </svg>
-);
-
 const MinimizeIcon = () => (
   <svg width="10" height="10" viewBox="0 0 10 1" xmlns="http://www.w3.org/2000/svg">
     <rect width="10" height="1" fill="currentColor" />
@@ -61,8 +52,6 @@ const GitHubIcon = () => (
 
 function ApplicationTitlebar() {
   const [isMaximized, setIsMaximized] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [searchFocused, setSearchFocused] = useState(false);
 
   const appWindow = getCurrentWindow();
 
@@ -99,33 +88,6 @@ function ApplicationTitlebar() {
         <span className="titlebar__app-name">GitHub Explorer</span>
       </div>
 
-      {/* ── Center: Search bar ── */}
-      <div className={`titlebar__search-wrapper${searchFocused ? " titlebar__search-wrapper--focused" : ""}`}>
-        <div className="titlebar__search-icon">
-          <SearchIcon />
-        </div>
-        <input
-          className="titlebar__search-input"
-          type="text"
-          placeholder="Search repositories, users…"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          onFocus={() => setSearchFocused(true)}
-          onBlur={() => setSearchFocused(false)}
-          // Prevent drag from firing inside input
-          onMouseDown={(e) => e.stopPropagation()}
-        />
-        {searchValue && (
-          <button
-            className="titlebar__search-clear"
-            onClick={() => setSearchValue("")}
-            onMouseDown={(e) => e.stopPropagation()}
-            aria-label="Clear search"
-          >
-            ✕
-          </button>
-        )}
-      </div>
 
       {/* ── Right: Window controls ── */}
       <div className="titlebar__controls">
