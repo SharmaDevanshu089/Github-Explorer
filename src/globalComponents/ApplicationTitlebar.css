@@ -18,7 +18,7 @@
   box-sizing: border-box;
 
   /* Fluent mica-like surface */
-  background: rgba(20, 20, 24, 0.92);
+  background: rgb(23, 23, 26);
   backdrop-filter: blur(32px) saturate(1.6);
   -webkit-backdrop-filter: blur(32px) saturate(1.6);
 
