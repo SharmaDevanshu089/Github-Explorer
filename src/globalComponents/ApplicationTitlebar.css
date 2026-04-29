@@ -1,0 +1,216 @@
+/* ── Google Font: Inter ───────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TITLEBAR — Windows 11 Fluent Design
+   Height: 40px  |  Layout: Left | Center | Right  |  Drag region on root
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.titlebar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  height: 40px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  /* Fluent mica-like surface */
+  background: rgba(20, 20, 24, 0.92);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: 'Inter', 'Segoe UI Variable', 'Segoe UI', sans-serif;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* Ensure it always sits on top */
+  position: relative;
+  z-index: 9999;
+}
+
+/* ── Left — App identity ────────────────────────────────────────────────── */
+
+.titlebar__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 12px;
+  justify-self: start;
+}
+
+.titlebar__app-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.titlebar__app-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* ── Center — Search bar ────────────────────────────────────────────────── */
+
+.titlebar__search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  width: 320px;
+  max-width: 380px;
+  height: 26px;
+  padding: 0 10px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 6px;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    width 0.2s ease;
+}
+
+.titlebar__search-wrapper:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.titlebar__search-wrapper--focused {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(99, 162, 255, 0.65);
+  box-shadow:
+    0 0 0 2px rgba(99, 162, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  width: 360px;
+}
+
+.titlebar__search-icon {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.titlebar__search-wrapper--focused .titlebar__search-icon {
+  color: rgba(99, 162, 255, 0.9);
+}
+
+.titlebar__search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.01em;
+
+  caret-color: rgba(99, 162, 255, 0.95);
+}
+
+.titlebar__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.titlebar__search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transition: color 0.12s ease, background 0.12s ease;
+  flex-shrink: 0;
+}
+
+.titlebar__search-clear:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Right — Window controls ────────────────────────────────────────────── */
+
+.titlebar__controls {
+  display: flex;
+  align-items: stretch;
+  justify-self: end;
+  height: 100%;
+}
+
+.titlebar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  color: rgba(255, 255, 255, 0.78);
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+/* Minimize & Maximize */
+.titlebar__btn--minimize:hover,
+.titlebar__btn--maximize:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 1);
+}
+
+.titlebar__btn--minimize:active,
+.titlebar__btn--maximize:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Close button — Windows red */
+.titlebar__btn--close:hover {
+  background: #c42b1c;
+  color: #ffffff;
+}
+
+.titlebar__btn--close:active {
+  background: #b22318;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* SVG icon pixel-perfect alignment */
+.titlebar__btn svg {
+  display: block;
+}

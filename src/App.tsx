@@ -9,12 +9,14 @@ function App() {
     setCounter(counter => counter + 1);
   }
   return (
+    <div>
     <main className="container">
       <div>
         {counter}<br />
         <button onClick={changeCounter}>Add</button>
       </div>
     </main>
+    </div>
   );
 }
 
