@@ -11,16 +11,16 @@ pub struct RepoContentItem {
     pub url: String,
     pub html_url: String,
     pub git_url: String,
-    pub download_url: Option<String>, // Can be null for directories
+    pub download_url: Option<String>,
     #[serde(rename = "type")]
-    pub item_type: String, // Maps the JSON "type" key
+    pub item_type: String,
     pub _links: Links,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Links {
     #[serde(rename = "self")]
-    pub self_link: String, // Maps the JSON "self" key
+    pub self_link: String,
     pub git: String,
     pub html: String,
 }
