@@ -25,6 +25,7 @@ pub struct Links {
     pub html: String,
 }
 
+// I SOMEHOW NEED TO ITERATETHIS IN FRONTEND
 #[tauri::command]
 pub async fn fetch_current_directory(url_to_find: String) -> Result<Vec<RepoContentItem>, String> {
     let request_url = url_to_find;
