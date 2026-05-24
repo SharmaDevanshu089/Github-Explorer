@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 
-async function displayFileList(githubUrl: string) {
+async function DisplayFileList(githubUrl: string) {
   const files = await invoke("fetch_current_directory", { urlToFind: githubUrl });
   console.log(files);
   return (
@@ -11,4 +11,4 @@ async function displayFileList(githubUrl: string) {
   )
 }
 
-export default displayFileList;
+export default DisplayFileList;
